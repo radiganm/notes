@@ -1,6 +1,7 @@
 
 ---
 title: Markowitz Portfolio
+author: Mac Radigan
 header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
