@@ -1,0 +1,4 @@
+#+TITLE: notes
+#+AUTHOR: Mac Radigan
+
+ # *EOF* 
