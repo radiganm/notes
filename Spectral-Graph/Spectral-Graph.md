@@ -12,6 +12,8 @@ header-includes:
  - \usepackage{titlesec}
  - \usepackage{algpseudocode}
 ---
+[//]: # Spectral-Graph.md
+[//]: # Mac Radigan
 
 The Laplacian matrix is the product of an oriented incident matrix, say $\mathbb{M}$,  and its transpose.  Note that this matrix is Hermitian, which is a property we will exploit in the numerical computation of eigenvalues.
 \begin{equation}

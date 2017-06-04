@@ -1,0 +1,34 @@
+\chapter{Measures of Volatility}
+%
+\section{Historical Volatility}
+%
+The historical volatility $(\sigma)$ of a stock Eq.~\eqref{eq:historicalVolatility} is the standard deviation of the stock price, usually taken over a 10-day period \cite{Dineen}.  As recent past performance of a stock may be a good indicator of recent future performance, it can be used as a benchmark in determining the risk of an investment, as well how far a stock price is likely to deviate from its moving average.  Some strategies, such as straddles (to be discussed later in the report on options), make use almost entirely on the volatility of a stock.
+%
+\begin{flalign}
+\label{eq:historicalVolatility}
+\sigma\{x\}_{n}&=\sqrt{\frac{1}{N}\cdot \sum\limits_{k=0}^{N}(x_{n-k}-SMA\{x\}_{n})^{2}} \\
+{} & \mbox{with typical values } N=10 \nonumber
+\end{flalign}
+\captionof{figure}{Historical Volatility}
+%
+\section{Average True Range (ATR)}
+\label{ATR}
+%
+The average true range (ATR) is an exponential moving average of the true range of a stock over a given period Eq.~\eqref{eq:ATR}.
+%
+\begin{equation}
+\label{eq:ATR}
+TR_{n}=\max(h_{n},c_{n})-min(l_{n},c_{n})
+\end{equation}
+\captionof{figure}{True Range}
+%
+\par
+It is said that a stock is statistically unlikely to move more than one ATR in a given trading day.
+
+%\section{Bollinger Bands}
+%
+%\section{On-Balance Volume (OBX)}
+%
+%\section{Volatility Index (IDX)}
+%
+

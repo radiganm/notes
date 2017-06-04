@@ -5,6 +5,8 @@ header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
 ---
+[//]: # Information-TheorY.md
+[//]: # Mac Radigan
 
 ## Information Theory
 

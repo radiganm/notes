@@ -1,0 +1,114 @@
+\chapter{Average Price}
+
+\section{Overview}
+Moving averages (MA) are smoothing filters which help to visualize a trend over a specified interval.  Each data point in the filtered signal is an averaging over the specified interval. These low pass filters (LPFs), eliminate noise in the price signal.  This indicator lags the input signal (price signal).
+\par
+If the filter is implemented digitally in the time domain, then increasing the number of samples in the filter interval has the effect of lowering the cutoff frequency of the LPF in the frequency domain, and thus decreasing the responsiveness to short term trends.  Contrariwise, decreasing the number of samples in the filter interval increases the cutoff frequency seen in the frequency domain, thus making the moving average more responsive to short term trends.
+\par
+Unless otherwise noted, references made herein to the moving average refer to the simple moving average (Sec.~\ref{price:SMA}), and depicted by overloading the common notation for averages $\bar{X}$.  Although sometimes useful to center the filter on the current sample (central moving average), for the methods discussed herein the filters are causal.
+\par
+
+\section{Simple Moving Average}\label{price:SMA}
+The simple moving average (SMA) have the form Eq.~\eqref{eq:SMA}. They apply an equal weighting to each sample in the filter, ($\frac{1}{N}$), and tend to lag the input signal significantly.
+%
+\begin{equation}
+\label{eq:SMA}
+SMA_{N}\{x\}_{n}=\frac{1}{N}\sum\limits_{k=0}^{N}x_{n-k}
+\end{equation}
+\captionof{figure}{Simple Moving Average}
+%
+\par
+%
+\section{Exponential Moving Average}
+Weighted moving averages (WMA) apply a different weighting coefficient to each sample in the average, whereby emphasizing and de-emphasizing particular samples.  By applying heavier weights to more recent samples, the lag of the filter can be reduced, resulting in an indicator that more closely matches the current trend.  
+\par
+In all weighted averages, the result is normalized such that the sum of the weights in the filter add up to the number of filter samples.  That is, the following condition must hold for all weights $w_{i}$ in the filter:
+\begin{equation}
+\label{eq:averageNormalization}
+\sum\limits_{i=1}^{N}w_{i}=N
+\end{equation}
+\captionof{figure}{Normalization Condition for Moving Averages}
+\par
+In the case of the exponential moving average (EMA), an exponentially decreasing weight is applied to each successive sample in reverse time ($w_{i}=\frac{1}{(1-\alpha)^{i}}$).  The average is normalized as described above Eq.~\eqref{eq:averageNormalization}.
+\begin{equation}
+EMA_{\alpha,N}\{x\}_{n}=\frac{\sum\limits_{k=0}^{N}(1-\alpha)^{k}\cdot x_{n-k}}{\sum\limits_{k=0}^{n-k}(1-\alpha)^{k}}
+\end{equation}
+\captionof{figure}{Exponential Moving Average}
+
+\subsection{Example Application - Moving Average as an Indicator of a Trend}
+Moving averages can be used as an indicator of trending over a specified period ($N$).  The first derivative of the moving average with respect to time gives an estimate of the rate of change ($v_{n}=\frac{\partial x}{\partial t}x_{n}$).  Likewise, the second derivative estimates the acceleration of the change in price ($a_{n}=\frac{\partial^2 x}{\partial t^2}x_{n}$).  The digital implementation leaves a variety of choices in differentiation filters to arrive at these derivatives.
+\par
+In Fig~\ref{MA} and LMT in 2009 can be seen along with a 10-day moving average of the closing price.
+%%There is variety of choice in the digital implentation of the derivatives.  For the purpose of this example, the simple difference equations may be used Eq.~\eqref{eq:priceDerivatives}.
+%%
+%%\begin{flalign}
+%%\label{eq:priceDerivatives}
+%%v_{n} = p_{n}-p_{n-1} \\
+%%a_{n} = v_{n}-v_{n-1} \nonumber
+%%\end{flalign}
+%%\captionof{figure}{Time Derivatives of Price}
+\begin{figure}[ht]\centering
+\label{MA}
+\includegraphics[width=1\textwidth]{figures/EMA-10-LMT-1.eps}
+\caption{$EMA_{N=10}\{c_{LMT \approx 2009}\}$}
+\end{figure}
+
+\section{Moving Average Convergence-Divergence (MACD)}
+\label{MACD}
+The Moving Average Convergence Divergence (MACD) is an indicator of the rate of change in stock price (an estimation of $v_{n}=\frac{\partial x}{\partial t}x_{n}$) \cite{Wikipedia:MACD}.
+The indicator achieves this by computing a difference in EMAs with periods to two different lengths Eq.~\eqref{eq:MACD}.  As the average price of the shorter and longer trend estimations approach (convergence), the measure of the MACD approaches zero.  As the trends separate (divergence), the magnitude of the MACD increases.
+%
+\begin{flalign}
+\label{eq:MACD}
+MACD_{\alpha,N_{1},N_{2}}\{x\}&=EMA_{\alpha,N_{1}}\{x\}-EMA{\alpha,N_{2}}\{x\} \\
+{} & \mbox{with typical values } N_{1}=12, N_{2}=24 \nonumber
+\end{flalign}
+\captionof{figure}{Moving Average Convergence-Divergence (MACD)}
+\par
+A function called the Signal (SIGNAL) Eq.~\eqref{eq:MACDSignal} is generally used as trigger for finding an inflection in the price signal.  It is a smoothing of the MACD signal, specifically an EMA of the MACD, with an EMA filter length slightly less than the short term trend component of the MACD itself.  When the MACD crosses up through the signal line (sometimes called a golden cross), an increase in price is predicted.  When the signal line crosses down through the MACD (sometimes called a dead cross), a decrease in price is predicted.  Thus, inflection points in the price are expected when the condition $MACD-Signal=0$ is met.  The Signal line crossing is found more reliable than the MACD zero crossing \cite{Wikipedia:MACD}.
+%
+\begin{flalign}
+\label{eq:MACDSignal}
+SIGNAL_{\alpha,N_{S},N_{1},N_{2}}\{x\}&=EMA_{\alpha,N_{S}}\{MACD_{\alpha,N_{S},N_{1},N_{2}}\{x\}\} \\
+{} & \mbox{with typical values } N_{1}=12, N_{2}=24, N_{S}=9 \nonumber
+\end{flalign}
+\captionof{figure}{MACD Signal Line}
+\par
+To assist graphical displays, it is common to display a third signal called a Histogram (HIST) Eq.~\eqref{eq:MACDHistogram}.  The Histogram is the difference of the MACD and the Signal line, and is used for the sole purpose of displaying the histogram signal crossings.  For this purpose, it is usually plotted as a histogram, to emphasize the zero crossings without cluttering the other signals in the display.  Values of zero in the Histogram will predict inflections in the price signal \cite{Wikipedia:MACD}.
+%Being the difference of the rate of change in price, the Histogram represents the acceleration of the price signal (a simple estimation of the true price acceleration $a_{n}=\frac{\partial^2 x}{\partial t^2}x_{n}$).  Values of zero in the Histogram will predict inflections in the price signal \cite{Wikipedia:MACD}.
+%
+\begin{flalign}
+\label{eq:MACDHistogram}
+HISTOGRAM_{\alpha,N_{S},N_{1},N_{2}}\{x\}&=MACD_{\alpha,N_{1},N_{2}}\{x\}-SIGNAL_{\alpha,N_{S},N_{1},N_{2}}\{x\} \\
+{} & \mbox{with typical values } N_{1}=12, N_{2}=24, N_{S}=9 \nonumber
+\end{flalign}
+\captionof{figure}{MACD Histogram}
+
+\subsection{Example - MACD as an Indicator to Buy/Sell}
+As an example, consider LMT on 12-Mar-09 trading at \$60.97 per share.  On this day, the Histogram is zero, and the MACD crosses up through the Signal line (indicating prices will increase).  Using the MACD as the sole indicator, the trade is entered on this day.  
+\par
+The position is held until 03-Apr-09, when the Histogram is again zero.  An anxious investor may wish to sell at this time, at the share price of \$67.34 per share.  This lags the nearest previous local maximum of one day prior, 02-Apr-09 at a price of \$
+69.24 per share.
+\par
+\begin{center}
+\fbox{$(\frac{c_{03Apr}}{c_{12Mar}}-1) \times 100=(\frac{\$67.34}{\$60.97}-1) \times 100=10.44\%\mbox{ ROI}$}
+\end{center}
+At this time the MACD has not crossed under the Signal line, and on the next day (04-Apr-09), the MACD bounces back (increases relative to the Signal), with the next zero crossing not occuring unti 22-Apr-09, when the price of LMT was at \$74.97 per share.  The investor may exit the position at this time, as the following days the MACD oscillates through the Signal line, with indeterminant information.
+\par
+\begin{center}
+\fbox{$(\frac{c_{22Arp}}{c_{12Mar}}-1) \times 100=(\frac{\$74.97}{\$60.97}-1) \times 100=22.96\%\mbox{ ROI}$}
+\end{center}
+If the investor awaits for the MACD to move a significant distance below the Signal, rather than tangential to it, the realization would occur on 07-May-09, at \$79.68 per share.
+\par
+\begin{center}
+\fbox{$(\frac{c_{07May}}{c_{12Mar}}-1) \times 100=(\frac{\$79.68}{\$60.97}-1) \times 100=30.68\%\mbox{ ROI}$}
+\end{center}
+%
+\begin{figure}[ht]\centering
+\includegraphics[width=1\textwidth]{figures/MACD-factory-LMT-4-a.eps}
+\caption{$MACD\{c_{LMT \approx 2009}\}$}
+\end{figure}
+
+
+
+

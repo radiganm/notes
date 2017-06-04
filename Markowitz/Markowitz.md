@@ -6,6 +6,8 @@ header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
 ---
+[//]: # Markowitz.md
+[//]: # Mac Radigan
 
 \subsection{Introduction}
 Markowitz portfolio theory is used in investment management as a tool for diversifying away risk through portfolio balancing.  Given a set of investment assets, it finds the most efficient  allocation (portfolio weights).  Here, efficiency is defined  as minimizing the expected variance.  Markowitz portfolios may be subject to specified constraints, such as a specific return on investment (expected price), non-negativity constraints (restricting short selling), and may include risk-free assets or market indexes \cite{WikiMPT}.

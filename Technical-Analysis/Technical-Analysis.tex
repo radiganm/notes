@@ -1,0 +1,41 @@
+%% Technical-Analysis.tex
+%% Mac Radigan
+\documentclass{report}
+\usepackage{graphicx,amssymb,amstext,amsmath,amsthm,caption,hyperref,mathtools}
+\hypersetup{
+ colorlinks,%
+ citecolor=blue,%
+ filecolor=blue,%
+ linkcolor=blue,%
+ urlcolor=blue
+}
+\newcommand\Quote[1]{\lq\textsl{#1}\rq}
+\newcommand\fr[2]{{\textstyle\frac{#1}{#2}}}
+\begin{document}
+%-----------------------------------------------------------
+\title{Technical Analysis Notes}
+\author{Mac Radigan}
+\date{} % comment this out if you would like to include the date
+\maketitle
+%-----------------------------------------------------------
+\begin{abstract}\centering
+This provides a general overview of techniques used for technical analysis.  Some general concepts of analysis are addressed, as well as particular techniques and formulae.  It also provides the framework and notation that will be utilized in analysis throughout the course.  Most importantly, it focuses on particular techniques that will be applied during trading, and further analyzed in furture reports.  For these particular techniques, examples are given of their application.  There is a discussion of their strengths, as well as why they were chosen.
+\end{abstract}
+%-----------------------------------------------------------
+\tableofcontents
+\listoffigures
+%-----------------------------------------------------------
+\include{Technical-Analysis-introduction}
+\include{Technical-Analysis-average}
+\include{Technical-Analysis-momentum}
+\include{Technical-Analysis-volatility}
+%\include{Technical-Analysis-patterns}
+\include{Technical-Analysis-conclusion}
+%-----------------------------------------------------------
+\addcontentsline{toc}{chapter}{\numberline{}Bibliography}
+\include{Technical-Analysis-bibliography}
+%-----------------------------------------------------------
+\appendix
+%-----------------------------------------------------------
+\end{document}
+%% *EOF*

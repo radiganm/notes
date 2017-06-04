@@ -5,6 +5,8 @@ header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
 ---
+[//]: # Machine-Learning.md
+[//]: # Mac Radigan
 
 |Symbol                                   | Name                          |
 |:---------------------------------------:|:------------------------------|

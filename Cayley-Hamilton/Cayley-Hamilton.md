@@ -1,12 +1,16 @@
-
 ---
 title: The Frame Algorithm and the Cayley-Hamilton Theorem
 header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
 ---
+[//]: # Cayley-Hamilton.md
+[//]: # Mac Radigan
+[//]: # ( The following excerpt is from **Matrix Theory, From Generalized Inverses to Jordan Forms**, by Robert Piziak and P. L. Odell.)
 
 The following excerpt is from **Matrix Theory, From Generalized Inverses to Jordan Forms**, by Robert Piziak and P. L. Odell.
+
+[//]: ~ # The Frame Algorithm and the Cayley-Hamilton Theorem
 
 In 1949, **J. Sutherlang Frame** (24 December 1907 - 27 February 1997) published an abstract in the *Bulletin of the American Mathematical Society* indicating a recursive algorithm for computing the inverse of a matrix and, as a by-product, getting additional informaiton, including the famous Cayley-Hamilton theorem.  (Hamilton is the Irish mathematician **William Rowan Hamilton** (4 August 1805 - 2 September 1895), and Cayley is **Aurthur Cayley** (16 August 1821 - 26 January 1895.)  We have not been able to find an actual paper with a detailed account of these claims.  Perhaps the author thought the abstract sufficient and went on with his work in group representations.  Perhaps he was told this algorithm had beeen rediscovered many times (see [House, 1964, p. 72]).  Whatever the case, in this section, we will expand on and expose the details of Frame's algorithm.  Suppose $A \in \mathbf{C}^{n \times n}$.  The *characteristic matrix* of A is $xI - A \in \mathbf{C}\left[x\right]^{n \times n}$, the collection of *n*-by*n* matrices with polynomial entries.  We must open our minds to accepting matrices with polynomial entries.  For example, $\left[ {\begin{array}{cc} x^2+1 & x-3 \\ 4x+2 & x^3-7 \\ \end{array} }\right] \in \mathbf{C}\left[x\right]^{2 \times 2}$.  Determinants work just fine for these kinds of matrices.  The determinant of $xI - A$, $det\left(xI - A\right) \in \mathbf{C}\left[x\right]$, the polynomials in x, and is what we call the *characteristic polynomial* of A:
 
@@ -175,5 +179,82 @@ Why would anybody think to do such a thing?  Well, the appearance of the coeffic
 \begin{center}
 $tr\left(AB_{k-1}\right) = s_k + c_1s_{k-1} + \cdots + c_{k-2}s_2 + c_{k-1}s_1$ .
 \end{center}
+
+## Digression on Newton's Identities
+
+Newton's identities go back aways.  They relate the sums of powers of the roots of a polynomial recursively to the coefficients of the polynomial.  Many proofs are available.  Some involve the algebra of symmetric functions, but we do not want to take the time to go there.  Instead, we will use a calculus-baed argument following the ideas of [Eidswick 1968].  First, we need to recall some facts about polynomials.  Let $p\left(x\right) = a_0 + a_1 x + \cdots + a_n x^n$.  Then the coefficients of $p$ can be expressed in terms of derivatives of $p$ evaluated at zero (remember Taylor polynomials?):
+
+\begin{center}
+$p\left(x\right) = p\left(0\right) + p^{'}\left(0\right)x + \frac{p^{''}\left(0\right)}{2!}x^2 + \cdots + \frac{p^{\left(n\right)}x^n}{n!}x^n$.
+\end{center}
+
+Now here is something really slick.  Let's illustrate a general fact.  Suppose $p\left(x\right) = \left(x-1\right)\left(x-2\right)\left(x-3\right) = -6 + 11x - 6x^2 + x^3$.  Do a wild and crazy thing.  Reverse the rolls [*sic roles*] of the coefficients and form the new reversed polynomial $q\left(x\right) = -6x^3 + 11x^2 - 6x + 1$.  Clearly $q\left(1\right) = 0$ but, more amazingly, $q\left(\frac{1}{2}\right) = -\frac{6}{8} + \frac{11}{4} - \frac{6}{2} + 1= \frac{-6+22-24+8}{8} = 0$.  You can also check $q\left(\frac{1}{3}\right) = 0$.  So the reversed polynomial has as roots the reciprocals of the roots of the original polynomial.  Of course, the roots are not zero for this to work.  This fact is generally true.  Suppose $p\left(x\right) = a_0 + a_1 x + \cdots + a_n x^n$ and the reversed polynomial is $q\left(x\right) = a_n + a_{n-1} x + \cdots + a_0 x^n$.  Note
+
+\begin{center}
+$q\left(0\right) = a_n, q^{'}\left(0\right) = a_{n-1}, \cdots , \frac{q^{\left(n\right)}\left(0\right)}{n!} = a_0$.
+\end{center}
+
+Then $r \neq 0$ is a root of p iff $\frac{1}{r}$ is a root of q.
+
+Suppose $p\left(x\right) = a_0 + a_1 x + \cdots + a_n x^n = a_n \left(x-r_1\right)\left(x-r_2\right)\cdots\left(x-r_n\right)$.  The $r_i$s are, of course, the roots of $p$, which we assume to be nonzero but not necessarily distinct.  Then the reversed polynomial $q\left(x\right) = a_n + a_{n-1} x + \cdots + a_0 x^n = a_0 \left(x-\frac{1}{r_1}\right)\left(x-\frac{1}{r_2}\right)\cdots\left(x-\frac{1}{r_n}\right)$.  For the sake of illustration, suppose $n=3$.  
+
+Then form $$f\left(x\right) = \frac{q^{'}\left(x\right)}{q\left(x\right)} = \frac{ \left(x-r_1^{-1}\right) \left[ \left( x-r_2^{-1} \right) + \left( x-r_3^{-1} \right) \right] \left[ \left( x-r_2^{-1} \right) + \left( x-r_3^{-1} \right) \right] }{ \left( r-r_1 \right) \left( r-r_2 \right) \left( r-r_3 \right) }$$
+$$= \frac{1}{x-r_1^{-1}} + \frac{1}{x-r_2^{-1}} + \frac{1}{x-r_3^{-1}}$$.  Generally then,
+
+\begin{center}
+$f\left(x\right) = \sum\limits_{k=1}^{n}\frac{1}{\left(x-r_k^{-1}\right)}$.
+\end{center}
+
+Let's introduce more notation.  Let $s_m = \sum\limits_{k=1}^m$ for $m = 1,2,3,\cdots$.  Thus, $s_m$ is the sum of the $m^{th}$ powers of roots of $p$.  The derivatives of $f$ are intimately related to the $s$s.  Basi differentiation yields
+
+$$\begin{array}{cccc}
+           &                                                                & f(0)      & = -s_1       \\
+f(^{'}(x)  & = \sum\limits_{k=1}^n\frac{-1}{\left(x-r_k^{-1}\right)^2}      & f^{'}(0)  & = -s_2       \\
+f(^{''}(x) & = \sum\limits_{k=1}^n\frac{-2}{\left(x-r_k^{-1}\right)^3}      & f^{''}(0) & = -2s_3      \\
+\vdots     \\
+f(^{k}(x)  & = \sum\limits_{k=1}^n\frac{-k!}{\left(x-r_k^{-1}\right)^{k+1}} & f^{k}(0)  & = -k!s_{k+1} \\
+\end{array}$$.
+
+The last piece of the puzzle is the rule of taking the derivative of a product;  this is the so-called *Leibnitz rule* for differentiating a product:
+
+\begin{center}
+$D^n(F(x)G(x)) = \sum\limits_{j=0}^n{n \choose j}F^{(j)}G^{(n-j)}(x)$.
+\end{center}
+
+All right, let's do the argument.  We have $f\left(x\right) = \frac{q^{'}\left(x\right)}{q\left(x\right)}$, so $q^{'}\left(x\right) = f\left(x\right)q\left(x\right)$.
+
+Therefore, using Leibnitz rule
+
+\begin{equation*}
+q^{\left(m\right)}\left(x\right) = \left[ f\left(x\right) q\left(x\right) \right]^{\left(m-1\right)} = \sum\limits_{k=0}^{m-1}{m-1 \choose k} f\left(x\right) q^{\left(m-1-k\right)}\left(x\right).
+\end{equation*}
+
+Plugging in zero, we get
+
+\begin{center}
+\end{center}
+
+
+\begin{equation*}
+\begin{split}
+q^{\left(m\right)}\left(0\right) &= \sum\limits_{k=0}^{m-1}{m-1 \choose k} f\left(0\right) q^{\left(m-1-k\right)}\left(0\right) \\
+                                 &= \sum\limits_{k=0}^{m-1} \frac{\left(m-1\right)!}{k!\left(m-1-k\right)!} \left(-k!\right) s_{k+1} q^{\left(m-1-k\right)}\left(0\right).
+\end{split}
+\end{equation*}
+
+Therefore,
+
+\begin{center}
+$\frac{q^{\left(m\right)}\left(0\right)}{m!} = - \frac{1}{m} \sum\limits_{k=0}^{m-1} \frac{q^{\left(m-1-k\right)}\left(0\right)}{\left(m-1-k\right)!} s_{k+1}$.
+\end{center}
+
+One more substitution and we have the *Newton identities*
+
+\begin{equation*}
+\begin{split}
+0 &= ma_{n-m} = \sum\limits_{k=0}^{m-1}a_{n-m+k+1}s_{k+1} \mbox{ if } 1 \leq m \leq n \\
+0 &= \sum\limits_{k=m-n-1}^{m-1}a_{n-m+k+1}s_{k+1} \mbox{ if } m > n. \\
+\end{split}
+\end{equation*}
 
 

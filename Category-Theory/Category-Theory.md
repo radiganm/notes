@@ -6,6 +6,8 @@ header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
 ---
+[//]: # Category-Theory.md
+[//]: # Mac Radigan
 
 ## Kleisli Triple $\left( M, unit, \star \right)$
 
