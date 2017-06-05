@@ -257,4 +257,3 @@ One more substitution and we have the *Newton identities*
 \end{split}
 \end{equation*}
 
-
