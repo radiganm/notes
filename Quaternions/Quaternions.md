@@ -86,8 +86,9 @@ q_z & -q_y &  q_y &  q_x
 ### product
 
 $\mathbf{p}\mathbf{q}
+= R\left(\mathbf{p}\right)R\left(\mathbf{q}\right) + I\left(\mathbf{p}\right)I\left(\mathbf{q}\right)
 = \left[ \begin{array}{cccc}
-p_0 q_x + p_0 q_y + p_0 q_z \\
+p_0 \undervec{q} + q_0 \undervec{p} + \undervec{p} \times \undervec{q} \\
 p_0 q_0 - \undervec{p}\undervec{q}
 \end{array} \right]
 ^{\intercal}$

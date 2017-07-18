@@ -17,7 +17,7 @@ latex:
 	    -o $(target).pdf
 
 view:
-	@zathura -x a $(target).pdf 1>/dev/null 2>/dev/null
+	@zathura -x -a $(target).pdf 1>/dev/null 2>/dev/null
 
 clobber: clean
 	-rm -f $(target).pdf
