@@ -8,6 +8,7 @@ header-includes:
  - \usepackage{amsmath}
  - \usepackage{mathrsfs}
  - \usepackage{amsthm}
+ - \usepackage{caption}
 ---
 [//]: # Quadrature Sampling
 [//]: # Mac Radigan

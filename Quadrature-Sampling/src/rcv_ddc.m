@@ -6,7 +6,7 @@
   function rcv_ddc(fs, t, fc, fi, A, fk, phi, tag)
     
     %% Receiver Channels
-    x        = A*sin(2*pi*fk*t + phi);         % signal at antenna
+    x        = A*cos(2*pi*fk*t + phi);         % signal at antenna
     fd       = -1 * abs(fc - fi);              % mixer frequency
     x_i      = x .* cos(2*pi*fd*t);            % real channel
     x_q      = x .* sin(2*pi*fd*t);            % quadrature channel

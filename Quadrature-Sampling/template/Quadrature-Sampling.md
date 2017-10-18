@@ -1,5 +1,8 @@
 {% include 'header.md' %}
 
+\captionsetup{labelformat=empty}
+\captionsetup{font=small}
+
 # Preliminaries
 
 ## Context of Discussion
@@ -157,7 +160,6 @@ inverse transform:
 \end{split}
 \end{equation*}
 
-
 ## Fourier Transform as the Superposition of Inner Products
 
 ## Fourier Analysis of a Single Frequency Component
@@ -166,10 +168,10 @@ inverse transform:
 
 \begin{equation*}
 \begin{split}
-\mathbb{F}\{e^{2\pi i f_k t + \phi}\} 
-&= \int_{-\infty}^{+\infty} e^{2\pi i f_k t + \phi} e^{-2 \pi i f t} dt \\
-&= \int_{-\infty}^{+\infty} e^{2\pi i \left( f_k - f \right) t} e^\phi dt \\
-&= 2\pi e^{-i\phi}\delta\left(f - f_k\right)
+\mathbb{F}\{e^{2\pi i f_k t + \phi_k}\} 
+&= \int_{-\infty}^{+\infty} e^{2\pi i f_k t + \phi_k} e^{-2 \pi i f t} dt \\
+&= \int_{-\infty}^{+\infty} e^{2\pi i \left( f_k - f \right) t} e^\phi_k dt \\
+&= 2\pi e^{-i\phi_k}\delta\left(f - f_k\right)
 \end{split}
 \end{equation*}
 
@@ -177,23 +179,58 @@ inverse transform:
 
 \begin{equation*}
 \begin{split}
-\mathbb{F}\{\mathbb{RE}\{e^{2\pi i f_k t + \phi}\}\}
-&= \mathbb{F}\{\mathbb{RE}\{ \cos\left(2\pi i f_k t + \phi\right) + i\sin\left(2\pi i f_k t + \phi\right) \}\} \\
-&= \mathbb{F}\{\cos\left(2\pi i f_k t + \phi\right) \} \\
-&= \mathbb{F}\{ \frac{ e^{2\pi i f_k t + \phi} + e^{-2\pi i f_k t + \phi} }{2} \} \\
+\mathbb{F}\{\mathbb{RE}\{e^{2\pi i f_k t + \phi_k}\}\}
+&= \mathbb{F}\{\mathbb{RE}\{ \cos\left(2\pi i f_k t + \phi_k\right) + i\sin\left(2\pi i f_k t + \phi_k\right) \}\} \\
+&= \mathbb{F}\{\cos\left(2\pi i f_k t + \phi_k\right) \} \\
+&= \mathbb{F}\{ \frac{ e^{2\pi i f_k t + \phi_k} + e^{-2\pi i f_k t + \phi_k} }{2} \} \\
 &= \frac{1}{2} \left[ 
-  \int_{-\infty}^{+\infty} e^{2\pi i f_k t + \phi} e^{-2 \pi i f t} dt 
+  \int_{-\infty}^{+\infty} e^{2\pi i f_k t + \phi_k} e^{-2 \pi i f t} dt 
   +
-  \int_{-\infty}^{+\infty} e^{-2\pi i f_k t + \phi} e^{-2 \pi i f t} dt 
+  \int_{-\infty}^{+\infty} e^{-2\pi i f_k t + \phi_k} e^{-2 \pi i f t} dt 
 \right] \\
 &= \frac{1}{2} \left[ 
-  \int_{-\infty}^{+\infty} e^{2\pi i \left( f_k - f \right) t} e^\phi dt
+  \int_{-\infty}^{+\infty} e^{2\pi i \left( f_k - f \right) t} e^\phi_k dt
   +
-  \int_{-\infty}^{+\infty} e^{2\pi i \left( -f_k - f \right) t} e^\phi dt
+  \int_{-\infty}^{+\infty} e^{2\pi i \left( -f_k - f \right) t} e^\phi_k dt
 \right] \\
-&= 2\pi \left[ e^{-i\phi} \delta\left(f + f_k\right) + e^{i\phi} \delta\left(f - f_k\right) \right]
+&= 2\pi \left[ e^{-i\phi_k} \delta\left(f + f_k\right) + e^{i\phi_k} \delta\left(f - f_k\right) \right]
 \end{split}
 \end{equation*}
+
+![Single Tone (complex signal, positive frequency)](./figures/fft_tone_pos_cplx.png "Single Tone (complex, positive)"){width=120%}
+![Single Tone (complex signal, negative frequency)](./figures/fft_tone_neg_cplx.png "Single Tone (complex, negative)"){width=120%}
+
+![Fourier Transform of a Single Tone (complex signal, positive frequency)](./figures/fft_tone_fft_pos_cplx.png "Fourier Transform of a Single Tone (complex, positive)"){width=120%}
+![Fourier Transform of a Single Tone (complex signal, negative frequency)](./figures/fft_tone_fft_neg_cplx.png "Fourier Transform of a Single Tone (complex, negative)"){width=120%}
+
+![Spectrum of a Single Tone (complex signal, positive frequency)](./figures/fft_tone_spectrum_pos_cplx.png "Spectrum of a Single Tone (complex, positive)"){width=120%}
+![Spectrum of a Single Tone (complex signal, negative frequency)](./figures/fft_tone_spectrum_neg_cplx.png "Spectrum of a Single Tone (complex, negative)"){width=120%}
+
+
+![Single Tone (real signal, positive frequency)](./figures/fft_tone_pos_real.png "Single Tone (real, positive)"){width=120%}
+![Single Tone (real signal, negative frequency)](./figures/fft_tone_neg_real.png "Single Tone (real, negative)"){width=120%}
+
+![Fourier Transform of a Single Tone (real signal, positive frequency)](./figures/fft_tone_fft_pos_real.png "Fourier Transform of a Single Tone (real, positive)"){width=120%}
+![Fourier Transform of a Single Tone (real signal, negative frequency)](./figures/fft_tone_fft_neg_real.png "Fourier Transform of a Single Tone (real, negative)"){width=120%}
+
+![Spectrum of a Single Tone (real signal, positive frequency)](./figures/fft_tone_spectrum_pos_real.png "Spectrum of a Single Tone (real, positive)"){width=120%}
+![Spectrum of a Single Tone (real signal, negative frequency)](./figures/fft_tone_spectrum_neg_real.png "Spectrum of a Single Tone (real, negative)"){width=120%}
+
+
+![Single Tone (imaginary signal, positive frequency)](./figures/fft_tone_pos_imag.png "Single Tone (imaginary, positive)"){width=120%}
+![Single Tone (imaginary signal, negative frequency)](./figures/fft_tone_neg_imag.png "Single Tone (imaginary, negative)"){width=120%}
+
+![Fourier Transform of a Single Tone (imaginary signal, positive frequency)](./figures/fft_tone_fft_pos_imag.png "Fourier Transform of a Single Tone (imaginary, positive)"){width=120%}
+![Fourier Transform of a Single Tone (imaginary signal, negative frequency)](./figures/fft_tone_fft_neg_imag.png "Fourier Transform of a Single Tone (imaginary, negative)"){width=120%}
+
+![Spectrum of a Single Tone (imaginary signal, positive frequency)](./figures/fft_tone_spectrum_pos_imag.png "Spectrum of a Single Tone (imaginary, positive)"){width=120%}
+![Spectrum of a Single Tone (imaginary signal, negative frequency)](./figures/fft_tone_spectrum_neg_imag.png "Spectrum of a Single Tone (imaginary, negative)"){width=120%}
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.matlab .numberLines}
+{% include 'src/fft_tone.m' %}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Hilbert Transform
 
@@ -216,22 +253,22 @@ H\{g\left(t\right)\}
 \begin{equation}
 \begin{split}
 x_{+}\left(t\right) 
-&= \cos\left( 2 \pi f_k + \phi \right)
+&= \cos\left( 2 \pi f_k + \phi_k \right)
 \end{split}
 \end{equation}
 
 \begin{equation}
 \begin{split}
 x_{-}\left(t\right) 
-&= \cos\left( -2 \pi f_k + \phi \right)
+&= \cos\left( -2 \pi f_k + \phi_k \right)
 \end{split}
 \end{equation}
 
-![Signal at Antenna (positive frequency)](./figures/rcv_antenna_pos.png "Signal at Antenna (positive)")
-![Signal at Antenna (negative frequency)](./figures/rcv_antenna_neg.png "Signal at Antenna (negative)")
+![Signal at Antenna (positive frequency)](./figures/rcv_antenna_pos.png "Signal at Antenna (positive)"){width=120%}
+![Signal at Antenna (negative frequency)](./figures/rcv_antenna_neg.png "Signal at Antenna (negative)"){width=120%}
 
-![Spectrum at Antenna (positive frequency)](./figures/rcv_antenna_freq_pos.png "Spectrum at Antenna (positive)")
-![Spectrum at Antenna (negative frequency)](./figures/rcv_antenna_freq_neg.png "Spectrum at Antenna (negative)")
+![Spectrum at Antenna (positive frequency)](./figures/rcv_antenna_freq_pos.png "Spectrum at Antenna (positive)"){width=120%}
+![Spectrum at Antenna (negative frequency)](./figures/rcv_antenna_freq_neg.png "Spectrum at Antenna (negative)"){width=120%}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.matlab .numberLines}
 {% include 'src/rcv_antenna.m' %}
@@ -242,25 +279,25 @@ x_{-}\left(t\right)
 \begin{equation}
 \begin{split}
 x_{+}\left(t\right) 
-&= e^{+i 2 \pi f_k t+ \phi } \\
-&= \cos\left( 2 \pi f_k + \phi \right) +i \sin\left( 2 \pi f_k + \phi \right)
+&= e^{+i 2 \pi f_k t+ \phi_k } \\
+&= \cos\left( 2 \pi f_k + \phi_k \right) +i \sin\left( 2 \pi f_k + \phi_k \right)
 \end{split}
 \end{equation}
 
 \begin{equation}
 \begin{split}
 x_{-}\left(t\right) 
-&= e^{-i 2 \pi f_k t+ \phi } \\
-&= \cos\left( -2 \pi f_k + \phi \right) +i \sin\left( -2 \pi f_k + \phi \right) \\
-&= \cos\left( 2 \pi f_k + \phi \right) -i \sin\left( 2 \pi f_k + \phi \right)
+&= e^{-i 2 \pi f_k t+ \phi_k } \\
+&= \cos\left( -2 \pi f_k + \phi_k \right) +i \sin\left( -2 \pi f_k + \phi_k \right) \\
+&= \cos\left( 2 \pi f_k + \phi_k \right) -i \sin\left( 2 \pi f_k + \phi_k \right)
 \end{split}
 \end{equation}
 
-![Analytic Signal (positive frequency)](./figures/rcv_analytic_pos.png "Analytic Signal (positive)")
-![Analytic Signal (negative frequency)](./figures/rcv_analytic_neg.png "Analytic Signal (negative)")
+![Analytic Signal (positive frequency)](./figures/rcv_analytic_pos.png "Analytic Signal (positive)"){width=120%}
+![Analytic Signal (negative frequency)](./figures/rcv_analytic_neg.png "Analytic Signal (negative)"){width=120%}
 
-![Spectrum of Analytic Signal (positive frequency)](./figures/rcv_analytic_freq_pos.png "Spectrum of Analytic Signal (positive)")
-![Spectrum of Analytic Signal (negative frequency)](./figures/rcv_analytic_freq_neg.png "Spectrum of Analytic Signal (negative)")
+![Spectrum of Analytic Signal (positive frequency)](./figures/rcv_analytic_freq_pos.png "Spectrum of Analytic Signal (positive)"){width=120%}
+![Spectrum of Analytic Signal (negative frequency)](./figures/rcv_analytic_freq_neg.png "Spectrum of Analytic Signal (negative)"){width=120%}
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.matlab .numberLines}
@@ -291,11 +328,11 @@ x_{-}\left(t\right)
                                                                    
 ~~~~~
 
-![Signal at DDC (positive frequency)](./figures/rcv_ddc_pos.png "Signal at DDC (positive)")
-![Signal at DDC (negative frequency)](./figures/rcv_ddc_neg.png "Signal at DDC (negative)")
+![Signal at DDC (positive frequency)](./figures/rcv_ddc_pos.png "Signal at DDC (positive)"){width=120%}
+![Signal at DDC (negative frequency)](./figures/rcv_ddc_neg.png "Signal at DDC (negative)"){width=120%}
 
-![Spectrum at DDC (positive frequency)](./figures/rcv_ddc_freq_pos.png "Spectrum at DDC (positive)")
-![Spectrum at DDC (negative frequency)](./figures/rcv_ddc_freq_neg.png "Spectrum at DDC (negative)")
+![Spectrum at DDC (positive frequency)](./figures/rcv_ddc_freq_pos.png "Spectrum at DDC (positive)"){width=120%}
+![Spectrum at DDC (negative frequency)](./figures/rcv_ddc_freq_neg.png "Spectrum at DDC (negative)"){width=120%}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~{.matlab .numberLines}
 {% include 'src/rcv_ddc.m' %}
