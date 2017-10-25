@@ -8,6 +8,7 @@
     %% positive frequency (+f_k)
     tag = 'pos';
     fk = +1 * o.fk;
+    sinusoids(   o.fs, o.t, o.fc,       1.0, fk, 0.0,   tag);
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @(x)x, sprintf('%s_cplx', tag));
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @real, sprintf('%s_real', tag));
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @imag, sprintf('%s_imag', tag));
@@ -18,6 +19,7 @@
     %% negative frequency (-f_k)
     tag = 'neg';
     fk = -1 * o.fk;
+    sinusoids(   o.fs, o.t, o.fc,       1.0, fk, 0.0,   tag);
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @(x)x, sprintf('%s_cplx', tag));
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @real, sprintf('%s_real', tag));
     fft_tone(    o.fs, o.t, o.fc,       o.A, fk, o.phi, @imag, sprintf('%s_imag', tag));
